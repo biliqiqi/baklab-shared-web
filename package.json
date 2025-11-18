@@ -8,9 +8,12 @@
     "./eslint": "./eslint.config.js",
     "./prettier": "./prettier.config.js",
     "./tsconfig": "./tsconfig.base.json",
+    "./tsconfig-app": "./tsconfig.app.json",
+    "./tsconfig-node": "./tsconfig.node.json",
     "./vite": "./vite.config.base.ts",
     "./tailwind": "./tailwind.config.js",
     "./postcss": "./postcss.config.js",
+    "./editorconfig": "./.editorconfig",
     "./api": "./src/api/index.ts",
     "./lib/*": "./src/lib/*",
     "./hooks/*": "./src/hooks/*"
