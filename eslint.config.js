@@ -1,9 +1,28 @@
 import js from '@eslint/js'
 import json from '@eslint/json'
+import fs from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 import globals from 'globals'
 import tseslint from 'typescript-eslint'
+
+const sharedDir = path.dirname(fileURLToPath(import.meta.url))
+const workspaceRoot = process.cwd()
+const hasLocalTsconfig = fs.existsSync(
+  path.join(workspaceRoot, 'tsconfig.app.json')
+)
+
+const parserOptions = hasLocalTsconfig
+  ? {
+      project: ['./tsconfig.app.json'],
+      tsconfigRootDir: workspaceRoot,
+    }
+  : {
+      project: [path.join(sharedDir, 'tsconfig.app.json')],
+      tsconfigRootDir: sharedDir,
+    }
 
 export default tseslint.config(
   {
@@ -28,10 +47,7 @@ export default tseslint.config(
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
-      parserOptions: {
-        project: './tsconfig.app.json',
-        tsconfigRootDir: import.meta.dirname,
-      },
+      parserOptions,
     },
     plugins: {
       'react-hooks': reactHooks,
