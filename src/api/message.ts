@@ -39,3 +39,8 @@ export const readArticle = (articleId: string) =>
   authRequest.post<ResponseData<null>>(`messages/read_article`, {
     json: { articleId },
   })
+
+export const readMessage = (messageId: string) =>
+  authRequest.post<ResponseData<null>>(`messages/read_message`, {
+    json: { messageId },
+  })
