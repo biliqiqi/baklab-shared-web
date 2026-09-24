@@ -234,8 +234,13 @@ export const getArticleStatusName = (status: ArticleStatus) => {
   }
 }
 
-export const isInnerURL = (url: string) =>
-  new URL(url).origin == location.origin
+export const isInnerURL = (url: string) => {
+  try {
+    return new URL(url, location.origin).origin === location.origin
+  } catch {
+    return false
+  }
+}
 
 export const getFirstChar = (str: string) => {
   const firstCharRes = str.match(/(\p{L}|\p{Emoji_Presentation})/u)
